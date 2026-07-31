@@ -1,0 +1,15 @@
+node_modules/
+.DS_Store
+Thumbs.db
+.claude/
+
+# 临时构建脚本与中间产物（_ 前缀），运行时不需要
+_*
+
+# 旧的外链图片映射（已被本地缓存取代）
+images.json
+
+# 图片走腾讯云 COS（前缀 art/，与姊妹站共用同一批对象——id 全局唯一，图已上传过不重复传）。
+# 本地 images/ 是指向 1001art/images 的目录联接，仅供本地预览，绝不入库。
+/images/
+/images

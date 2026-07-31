@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- 提前建立到图片 CDN（jsDelivr）的连接，缩短首屏图片延迟 -->
+<link rel="preconnect" href="https://pic-1302017848.cos.ap-nanjing.myqcloud.com" crossorigin>
+<link rel="dns-prefetch" href="https://pic-1302017848.cos.ap-nanjing.myqcloud.com">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="1001+ 艺术">
+<title>1001+ 浮世绘 · 1001+ Ukiyo-e</title>
+<meta name="description" content="汇聚人类历史上的公有领域艺术瑰宝，从史前壁画到当代艺术。A growing open-access gallery of public-domain art across human history.">
+<meta name="theme-color" content="#0a0a0f">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://xujiann.github.io/1001ukiyoe/">
+<meta property="og:title" content="1001+ 浮世绘 · 1001+ Ukiyo-e">
+<meta property="og:description" content="汇聚人类历史上的公有领域艺术瑰宝 · 从史前壁画到当代艺术">
+<meta property="og:image" content="https://pic-1302017848.cos.ap-nanjing.myqcloud.com/art/1.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pic-1302017848.cos.ap-nanjing.myqcloud.com/art/1.jpg">
+<link rel="canonical" href="https://xujiann.github.io/1001ukiyoe/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%237c6af7'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia,serif'%3E%E2%9D%96%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "1001+ 浮世绘 · 1001+ Ukiyo-e",
+  "alternateName": "1001+ Ukiyo-e Prints",
+  "url": "https://xujiann.github.io/1001ukiyoe/",
+  "description": "精选并展示人类历史上的著名艺术作品，从史前壁画到当代艺术。A curated bilingual gallery of famous works of art across human history.",
+  "inLanguage": ["zh-CN", "en"],
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": { "@type": "EntryPoint", "urlTemplate": "https://xujiann.github.io/1001ukiyoe/?q={search_term_string}" },
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-title">
+      <h1><span id="t-main">1001+</span><span id="t-sub"> 人类艺术瑰宝</span></h1>
+      <p class="subtitle" id="t-subtitle">跨越五万年的人类创造力</p>
+    </div>
+    <div class="header-right">
+      <div class="header-stats" id="stats">
+        <span class="stat"><strong id="shown-count">1001</strong> <span id="t-works">件作品</span></span>
+        <span class="stat"><strong id="era-count">30</strong> <span id="t-eras">个时代</span></span>
+        <span class="stat"><strong id="artist-count">0</strong> <span id="t-artists">位艺术家</span></span>
+      </div>
+      <button id="lang-toggle" class="lang-btn" title="语言 / Language">EN</button>
+    </div>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="search-wrap">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="search" placeholder="搜索作品名称、艺术家、年代…" autocomplete="off" aria-label="搜索作品">
+    <button class="clear-btn" id="clear-search" title="清除">✕</button>
+  </div>
+  <div class="filter-row">
+    <select id="era-filter" aria-label="时代筛选"><option value="">全部时代</option></select>
+    <select id="medium-filter" aria-label="媒材筛选"><option value="">全部媒材</option></select>
+    <select id="country-filter" aria-label="地区筛选"><option value="">全部地区</option></select>
+    <select id="sort-filter" aria-label="排序">
+      <option value="default">默认（名气）</option>
+      <option value="year_asc">年代：早→晚</option>
+      <option value="year_desc">年代：晚→早</option>
+      <option value="title">按标题</option>
+    </select>
+    <button id="artist-btn" class="btn-outline btn-text">按艺术家</button>
+    <button id="museum-btn" class="btn-outline btn-text">按馆藏</button>
+    <!-- 题材轴：数据不足时由 app.js 隐藏（标签目前来自大都会开放数据） -->
+    <button id="subject-btn" class="btn-outline btn-text" style="display:none">按题材</button>
+    <button id="timeline-btn" class="btn-outline btn-text">时间线</button>
+    <button id="fav-only-btn" class="btn-outline btn-text">♥ 收藏</button>
+    <button id="daily-btn" class="btn-outline btn-text">每日一作</button>
+    <button id="random-btn" class="btn-accent">随机作品</button>
+    <button id="view-toggle" class="btn-outline" title="切换视图">⊞</button>
+    <button id="help-btn" class="btn-outline" title="快捷键" aria-label="快捷键">?</button>
+  </div>
+</div>
+
+<!-- 题材云：点击任一题材即按该题材检索全站 -->
+<div class="subject-panel" id="subject-panel" style="display:none"></div>
+
+<div class="timeline-bar" id="timeline-bar"></div>
+
+<div class="timeline-nav" id="era-tabs"></div>
+
+<div class="artist-bar" id="artist-bar" style="display:none"></div>
+
+<div class="artist-header" id="artist-header" style="display:none"></div>
+
+<div class="artist-bar" id="museum-bar" style="display:none"></div>
+<div class="artist-header museum-header" id="museum-header" style="display:none"></div>
+
+<div class="artist-index-bar" id="artist-index-bar" style="display:none">
+  <input type="text" id="artist-filter" placeholder="筛选艺术家…" autocomplete="off" aria-label="筛选艺术家">
+  <button id="idx-sort" class="idx-sort-btn" type="button">按数量</button>
+  <span class="aif-count" id="artist-filter-count"></span>
+</div>
+<div class="artist-index" id="artist-index" style="display:none"></div>
+
+<main class="gallery" id="gallery"></main>
+
+<div class="pagination" id="pagination"></div>
+
+<div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-label="艺术品详情">
+  <div class="modal-box">
+    <button class="modal-close" id="modal-close" aria-label="关闭">✕</button>
+    <div class="modal-content">
+      <div class="modal-img-wrap" id="modal-img-wrap">
+        <img id="modal-img" alt="">
+        <div class="modal-img-placeholder" id="modal-placeholder"></div>
+        <button class="zoom-badge" id="zoom-badge" title="放大">⛶</button>
+      </div>
+      <div class="modal-info">
+        <div class="modal-head">
+          <div class="modal-era-badge" id="modal-era"></div>
+          <div class="modal-head-actions">
+            <button class="modal-fav" id="modal-fav">♡ 收藏</button>
+            <button class="modal-share" id="modal-share" title="复制链接">⎘</button>
+          </div>
+        </div>
+        <h2 id="modal-title"></h2>
+        <p id="modal-alt" hidden></p>
+        <div class="modal-artist-row">
+          <img id="modal-artist-avatar" class="modal-artist-avatar" alt="" style="display:none">
+          <p class="modal-artist" id="modal-artist"></p>
+        </div>
+        <button class="modal-artist-link" id="modal-artist-link">查看该艺术家全部作品 →</button>
+        <dl class="modal-meta">
+          <dt id="l-date">年代</dt><dd id="modal-year"></dd>
+          <dt id="l-medium">媒材</dt><dd id="modal-medium"></dd>
+          <dt id="l-location">馆藏地</dt><dd id="modal-location"></dd>
+          <dt id="l-country">国家/地区</dt><dd id="modal-country"></dd>
+        </dl>
+        <p class="modal-desc" id="modal-desc"></p>
+        <div class="modal-tags" id="modal-tags" style="display:none"></div>
+        <p class="modal-credit" id="modal-credit"></p>
+        <div class="modal-related" id="modal-related" style="display:none"></div>
+        <div class="modal-nav">
+          <button id="prev-art">← 上一件</button>
+          <span id="modal-num"></span>
+          <button id="next-art">下一件 →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="高清大图">
+  <div class="lightbox-toolbar">
+    <span class="lb-caption" id="lb-caption"></span>
+    <span class="lb-actions">
+      <button id="lb-zoomout" title="缩小">－</button>
+      <button id="lb-zoomin" title="放大">＋</button>
+      <button id="lb-reset" title="重置">⟲</button>
+      <a id="lb-original" href="#" target="_blank" rel="noopener" class="lb-link" title="查看原图">⧉ <span id="t-original">查看原图</span></a>
+      <button id="lb-close" title="关闭">✕</button>
+    </span>
+  </div>
+  <div class="lightbox-stage" id="lb-stage">
+    <img id="lb-img" alt="" draggable="false">
+    <div class="lb-spinner" id="lb-spinner"></div>
+  </div>
+  <div class="lb-hint" id="lb-hint">滚轮缩放 · 双击放大 · 拖动平移</div>
+</div>
+
+<div class="no-results" id="no-results" style="display:none">
+  <p id="t-noresults">未找到符合条件的作品</p>
+  <button id="reset-btn">重置筛选</button>
+</div>
+
+<div class="help-overlay" id="help-overlay" role="dialog" aria-modal="true" aria-label="键盘快捷键">
+  <div class="help-box">
+    <button class="help-close" id="help-close" aria-label="关闭">✕</button>
+    <h2 id="help-title">快捷键</h2>
+    <dl class="help-list">
+      <dt><kbd>/</kbd></dt><dd id="kbd-search">聚焦搜索框</dd>
+      <dt><kbd>R</kbd></dt><dd id="kbd-random">随机作品</dd>
+      <dt><kbd>A</kbd></dt><dd id="kbd-artist">切换艺术家视图</dd>
+      <dt><kbd>T</kbd></dt><dd id="kbd-timeline">切换时间线</dd>
+      <dt><kbd>F</kbd></dt><dd id="kbd-fav">切换仅看收藏</dd>
+      <dt><kbd>←</kbd> <kbd>→</kbd></dt><dd id="kbd-nav">上一件 / 下一件</dd>
+      <dt><kbd>Esc</kbd></dt><dd id="kbd-close">关闭弹窗 / 帮助</dd>
+      <dt><kbd>?</kbd></dt><dd id="kbd-help">显示本帮助</dd>
+    </dl>
+  </div>
+</div>
+
+<div class="about-overlay" id="about-overlay" role="dialog" aria-modal="true" aria-label="关于本站">
+  <div class="about-box">
+    <button class="help-close" id="about-close" aria-label="关闭">✕</button>
+    <div class="about-logo">❖</div>
+    <h2 id="about-title">关于本站</h2>
+    <div class="about-stats" id="about-stats"></div>
+    <p id="about-intro"></p>
+    <p id="about-sources"></p>
+    <p id="about-tech"></p>
+    <p class="about-credits" id="about-credits"></p>
+    <a class="about-gh" id="about-github" href="https://github.com/xujiann/1001ukiyoe" target="_blank" rel="noopener"></a>
+  </div>
+</div>
+
+<div id="live" class="sr-only" aria-live="polite"></div>
+<button id="to-top" class="to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+
+<footer class="site-footer">
+  <p id="t-footer">汇聚人类历史上的公有领域艺术瑰宝 · 从史前壁画到当代艺术</p>
+  <!-- 枢纽页入口：让首页 → 索引 → 实体页 → 作品页 形成搜索引擎可爬的三跳路径 -->
+  <p class="footer-hubs"><a href="artist/">艺术家索引 Artists</a> · <a href="museum/">博物馆索引 Museums</a></p>
+  <button class="footer-about" id="about-btn">关于本站</button>
+</footer>
+
+<!-- 首屏关键路径仅需 lang + 核心数据 + 引擎；artists.js/credits.js/desc.js/data-rest.js 由 app.js 按需懒加载 -->
+<script defer src="lang.js"></script>
+<script defer src="data.js"></script>
+<script defer src="app.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(()=>{}));
+}
+</script>
+<!-- hub-nav: back to 1001×1001 -->
+<a id="hub-link" href="https://xujiann.github.io/" title="返回 1001 × 1001 · 万物收藏" aria-label="返回 1001×1001 万物收藏">1001 × 1001</a>
+<style>#hub-link{position:fixed;left:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:120;display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:100px;background:rgba(18,15,28,.85);border:1px solid rgba(255,255,255,.14);color:#e8e8f0;font:600 12.5px/1 system-ui,-apple-system,"Segoe UI","Noto Sans SC",sans-serif;text-decoration:none;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 4px 16px rgba(0,0,0,.35);transition:transform .2s,border-color .2s,background .2s}#hub-link::before{content:"\2756";color:#d9b26a;font-size:13px}#hub-link:hover{transform:translateY(-2px);border-color:rgba(217,178,106,.6);background:rgba(28,22,42,.95)}@media(max-width:640px){#hub-link{font-size:11.5px;padding:6px 11px;left:10px}}</style>
+</body>
+</html>

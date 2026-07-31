@@ -1,0 +1,31 @@
+{
+  "name": "1001+ 浮世绘",
+  "short_name": "1001艺术",
+  "description": "汇聚人类历史上的公有领域艺术瑰宝，从史前壁画到当代艺术。",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#0a0a0f",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='86' fill='%237c6af7'/%3E%3Ctext x='256' y='346' font-size='300' text-anchor='middle' fill='white' font-family='Georgia,serif'%3E%E2%9D%96%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
