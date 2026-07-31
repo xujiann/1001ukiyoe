@@ -458,7 +458,7 @@
       // 并 toLowerCase（实测 47ms/次，中端手机约 200ms，打字明显滞后且不断触发 GC）。
       if(q){
         if(d._h === undefined) d._h = (d.title+" "+d.artist+" "+d.year+" "+d.era+" "+d.medium+" "+d.location+" "+(d.country||"")+" "+
-          (d.tg?d.tg.join(" "):"")+" "+(d.tg_en?d.tg_en.join(" "):"")+" "+
+          (d.fmt||"")+" "+(d.fmt_en||"")+" "+(d.tg?d.tg.join(" "):"")+" "+(d.tg_en?d.tg_en.join(" "):"")+" "+
           (d.title_en||"")+" "+(d.artist_en||"")+" "+(d.era_en||"")+" "+(d.location_en||"")+" "+(d.country_en||"")+" "+(d.medium_en||"")+" "+(d.py||"")).toLowerCase();
         if(!d._h.includes(q)) return false;
       }
