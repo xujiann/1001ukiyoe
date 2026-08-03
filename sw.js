@@ -2,7 +2,7 @@
    - 外壳（HTML/CSS/JS）：stale-while-revalidate
    - 本地图片（images/）：cache-first，按需缓存，离线可回看已浏览作品
 */
-const SHELL = "uki1001-shell-8791af6490";
+const SHELL = "uki1001-shell-2cd795b505";
 const IMGS  = "uki1001-img-v12";
 const IMG_CDN = "pic-1302017848.cos.ap-nanjing.myqcloud.com";   // 图片走腾讯云 COS（art/ 前缀）
 const IMG_CAP = 1200;                 // 图片缓存上限，FIFO 淘汰，防 Cache Storage 无限增长触发整源清退
